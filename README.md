@@ -1,5 +1,4 @@
-# IDS706-Week10-Mini-Project: PySpark Data Processing
-
+# IDS706-Week11-Mini-Project: Data Pipeline with Databricks
 This repository contains a PySpark script designed to perform sophisticated data processing on a large dataset, specifically focusing on game statistics. It demonstrates the use of Spark SQL for data querying and DataFrame API for transformations. 
 
 ## Project Overview
