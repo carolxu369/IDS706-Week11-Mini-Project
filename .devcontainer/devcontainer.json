@@ -1,0 +1,20 @@
+{
+    "name": "Python & PySpark",
+    "build": {
+      "dockerfile": "Dockerfile",
+      "context": "..",
+      "args": {
+        "VARIANT": "3.8",
+        "SPARK_VERSION": "3.1.1"
+      }
+    },
+    "settings": { 
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+      "ms-python.python",
+      "ms-python.vscode-pylance"
+    ],
+    "forwardPorts": [8888]
+  }
+  
