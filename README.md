@@ -1,32 +1,65 @@
 # IDS706-Week11-Mini-Project: Data Pipeline with Databricks
-This repository contains a PySpark script designed to perform sophisticated data processing on a large dataset, specifically focusing on game statistics. It demonstrates the use of Spark SQL for data querying and DataFrame API for transformations. 
 
-## Project Overview
+## Overview
 
-This PySpark application analyzes a dataset (`games.csv`), performs a column renaming transformation, and then executes a Spark SQL query to filter entries based on a positive ratio threshold. It first transformed the "title" column name to "Game Title" and then did a select query to select all the data entries with positive_ratio >= 90. The output data was exported to the output_data.csv folder with output csv files.
+This repository contains a Databricks data pipeline designed for processing and analyzing song data. The pipeline ingests data from a structured dataset, performs transformations, and stores the processed data for analysis. This allows for insightful queries into the music data, such as identifying popular artists and curating song lists based on certain criteria.
 
-## Prerequisites
+## Data Pipeline Function
 
-Ensure you have the following installed:
-- Docker
-- Python 3.6 or above
-- Apache Spark
+The data pipeline performs the following functions:
 
-## Installation & Running the Project
+- **Ingestion**: Reads a dataset of song metadata and features.
+- **Transformation**: Processes and transforms the data to a more analysis-friendly format.
+- **Storage**: Saves the transformed data for further analysis and querying.
 
-1. Clone this repository:
-    ```
-    git clone https://github.com/carolxu369/IDS706-Week10-Mini-Project.git
-    ```
-2. Install Python dependencies:
-    ```
-    pip install -r requirements.txt
-    ```
-3. Run the PySpark script:
-    ```
-    python data_processing.py
-    ```
-After running, the script will generate an output_data.csv file in the project directory with the processed data.
+## Data Source and Sink
 
-Attach the output data screenshot here:
-![Output Data](output.png)
+### Data Source
+
+- **Source Type**: Cloud File Storage (CSV format).
+- **Location**: `/databricks-datasets/songs/data-001/`.
+- **Schema**: The data includes fields such as `artist_id`, `artist_name`, `duration`, `release`, `tempo`, and others.
+
+### Data Sink
+
+- **Sink Type**: Databricks Managed Table.
+- **Table Name**: `prepared_song_data`.
+- **Storage Format**: The data is stored in a structured table format for easy querying and analysis.
+
+## Data Source and Sink Configuration
+
+### Source Configuration
+
+- Data is read as a stream using Spark's structured streaming capabilities.
+- Format: CSV, with tab (`\t`) as the separator.
+- Schema: Defined explicitly in the pipeline to match the structure of the source data.
+
+### Sink Configuration
+
+- The data is written to a Databricks managed table.
+- A checkpoint location is specified for fault tolerance in streaming (`/tmp/pipeline_get_started/_checkpoint/song_data`).
+- Data is processed and stored in real-time, making it immediately available for querying upon ingestion.
+
+## Analysis Queries
+
+Two example queries are included to demonstrate the potential analyses:
+
+1. **Artist Popularity by Year**: Identifies which artists released the most songs each year.
+2. **DJ List Curation**: Finds songs that fit certain criteria (e.g., time signature and tempo range) suitable for a DJ list.
+
+## Getting Started
+
+To use this pipeline:
+
+1. Ensure you have access to a Databricks workspace with the necessary permissions.
+2. Clone this repository.
+3. Import the notebooks into your Databricks workspace.
+4. Configure the cluster and attach the notebooks to it.
+5. Run the notebooks to establish the pipeline and perform analyses.
+  
+  
+![ingest](pic/ingest.png)
+![prepare](pic/prepare.png)
+![analyze1](pic/analyze1.png)
+![analyze2](pic/analyze2.png)
+![workflow](pic/workflow.png)

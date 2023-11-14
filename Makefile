@@ -1,10 +1,10 @@
+.PHONY: setup test lint
+
 setup:
-    pip install -r requirements.txt
+	pip install -r requirements.txt
 
 test:
-    python -m pytest
+	pytest
 
 lint:
-    flake8 data_processing.py
-
-.PHONY: setup test lint
+	flake8 .
